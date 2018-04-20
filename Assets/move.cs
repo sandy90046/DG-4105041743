@@ -11,10 +11,13 @@ public class move : MonoBehaviour
 
     public Text countText;
     public Text winText;
-
     int count;
-    public float speed;
     public float turnSpeed;
+    public GameObject shot;
+    public float fireRate;
+    public Transform shotSpawn;
+    float nextFire;
+
     // Use this for initialization
     void Start()
     {
@@ -41,6 +44,13 @@ public class move : MonoBehaviour
 
         if (Input.GetKey(KeyCode.RightArrow))
             transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
+
+        if (Input.GetButton("Fire1") && Time.time > nextFire)
+        {
+            nextFire = Time.time + fireRate;
+            Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+        }
+
 
     }
 
